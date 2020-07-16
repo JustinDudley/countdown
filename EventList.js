@@ -37,6 +37,10 @@ class EventList extends Component {
     this.setState({ events });
   }
 
+  handleAddEvent = () => {
+    this.props.navigation.navigate("form");
+  };
+
   render() {
     // used to return just <FlatList>, now returns an array
     return [
