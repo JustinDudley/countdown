@@ -22,8 +22,14 @@ const styles = StyleSheet.create({
 });
 
 class EventForm extends Component {
+  state = { title: null, date: "" };
+
   handleAddPress = () => {
     this.props.navigation.navigate("list");
+  };
+
+  handleChangeTitle = (value) => {
+    this.setState({ title: value });
   };
 
   render() {
@@ -34,6 +40,8 @@ class EventForm extends Component {
             style={styles.text}
             placeholder="Event title"
             spellCheck={false}
+            value={this.state.title}
+            onChangeText={this.handleChangeTitle}
           />
         </View>
         <TouchableHighlight onPress={this.handleAddPress}>
