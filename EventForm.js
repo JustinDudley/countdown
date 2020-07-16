@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DateTimePicker from "react-native-modal-datetime-picker";
 import {
   View,
   Text,
@@ -6,6 +7,8 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
+
+import { formatDateTime } from "./api";
 
 const styles = StyleSheet.create({
   fieldContainer: {
@@ -33,17 +36,41 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
   },
+  borderTop: {
+    borderColor: "#888888",
+    borderTopWidth: 0.5,
+  },
 });
 
 class EventForm extends Component {
   state = { title: null, date: "" };
 
   handleAddPress = () => {
-    this.props.navigation.navigate("list");
+    console.log(this.state);
+    this.props.navigation.goBack();
+    // KEEP, also works: this.props.navigation.navigate("list");
   };
 
   handleChangeTitle = (value) => {
     this.setState({ title: value });
+  };
+
+  handleDatePress = () => {
+    this.setState({ showDatePicker: true });
+  };
+
+  handleDatePicked = (date) => {
+    this.setState({
+      date,
+    });
+
+    this.handleDatePickerHide(); // hide if not using anymore
+  };
+
+  handleDatePickerHide = () => {
+    this.setState({
+      showDatePicker: false,
+    });
   };
 
   render() {
@@ -56,6 +83,20 @@ class EventForm extends Component {
             spellCheck={false}
             value={this.state.title}
             onChangeText={this.handleChangeTitle}
+          />
+          <TextInput
+            style={[styles.text, styles.borderTop]}
+            placeholder="Event date"
+            spellCheck={false}
+            value={formatDateTime(this.state.date.toString())}
+            editable={!this.state.showDatePicker}
+            onFocus={this.handleDatePress}
+          />
+          <DateTimePicker
+            isVisible={this.state.showDatePicker}
+            mode="datetime"
+            onConfirm={this.handleDatePicked}
+            onCancel={this.handleDatePickerHide}
           />
         </View>
         <TouchableHighlight style={styles.button} onPress={this.handleAddPress}>
