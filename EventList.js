@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, StyleSheet } from "react-native";
 
 import EventCard from "./EventCard";
+
+const styles = StyleSheet.create({
+  list: {
+    flex: 1,
+    paddingTop: 20,
+    backgroundColor: "#F3F3F3",
+  },
+});
 
 class EventList extends Component {
   //default state for this component:
@@ -11,7 +19,20 @@ class EventList extends Component {
 
   // to get the data that we want to bind to:
   componentDidMount() {
-    const events = require("./db.json").events;
+    // updates every second
+    setInterval(() => {
+      this.setState({
+        events: this.state.events.map((evt) => ({
+          ...evt,
+          timer: Date.now(),
+        })),
+      });
+    }, 1000);
+
+    const events = require("./db.json").events.map((e) => ({
+      ...e,
+      date: new Date(e.date),
+    }));
     this.setState({ events });
   }
 
@@ -21,6 +42,7 @@ class EventList extends Component {
         // data={[{ name: "a" }, { name: "b" }]}
         // renderItem={({ item }) => <Text>{item.name}</Text>}
         // to bind to real data:
+        style={styles.list}
         data={this.state.events}
         renderItem={({ item }) => <EventCard event={item}></EventCard>}
         keyExtractor={(item) => item.id}
