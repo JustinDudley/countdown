@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import EventList from "./EventList";
-import { EventForm } from "./EventForm";
+import EventForm from "./EventForm";
 
 const Stack = createStackNavigator(); // returns an object containing 2 properties: Screen and Navigator
 

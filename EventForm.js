@@ -1,43 +1,38 @@
 import React, { Component } from "react";
-import { View, Text, TouchableHighlight, Alert } from "react-native";
+import { View, Text, TouchableHighlight } from "react-native";
 
-export function EventForm({ navigation }) {
-  const handleAddPress = () => {
-    navigation.navigate("EventList");
+class EventForm extends Component {
+  handleAddPress = () => {
+    this.props.navigation.navigate("EventList");
+    // ?
   };
 
-  return (
-    <View>
-      <TouchableHighlight onPress={handleAddPress}>
-        <Text>Add</Text>
-      </TouchableHighlight>
-    </View>
-  );
+  render() {
+    return (
+      <View>
+        <TouchableHighlight onPress={this.handleAddPress}>
+          <Text>Add</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 }
 
-// class EventForm extends Component {
-//   constructor(props) {
-//     super(props);
-//     // this.state = navigation;
-//   }
+export default EventForm;
 
-//   handleAddPress = () => {
-//     Alert.alert("you pressed add");
-
-//     // this.navigation.navigate("EventList");
-
-//     // ?   (navigation logic will go here)
+// USING FUNCTION COMPONENT [[ Don't forget to use Brackets in App.js
+// import statement: import { EventForm } from "./EventForm"; ]] :
+//
+// export function EventForm({ navigation }) {
+//   const handleAddPress = () => {
+//     navigation.navigate("EventList");
 //   };
 
-//   render() {
-//     return (
-//       <View>
-//         <TouchableHighlight onPress={this.handleAddPress}>
-//           <Text>Add</Text>
-//         </TouchableHighlight>
-//       </View>
-//     );
-//   }
+//   return (
+//     <View>
+//       <TouchableHighlight onPress={handleAddPress}>
+//         <Text>Add</Text>
+//       </TouchableHighlight>
+//     </View>
+//   );
 // }
-
-// export default EventForm;
