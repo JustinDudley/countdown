@@ -38,7 +38,8 @@ class EventList extends Component {
   }
 
   render() {
-    return (
+    // used to return just <FlatList>, now returns an array
+    return [
       <FlatList
         // data={[{ name: "a" }, { name: "b" }]}
         // renderItem={({ item }) => <Text>{item.name}</Text>}
@@ -47,8 +48,13 @@ class EventList extends Component {
         data={this.state.events}
         renderItem={({ item }) => <EventCard event={item}></EventCard>}
         keyExtractor={(item) => item.id}
-      />
-    );
+      />,
+      <ActionButton
+        key="fab"
+        onPress={this.handleAddEvent}
+        buttonColor="rgba(231, 76, 60, 1)"
+      />,
+    ];
   }
 }
 
