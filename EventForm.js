@@ -1,23 +1,14 @@
 import React, { Component } from "react";
-import { View, Text, TouchableHighlight, Alert, Button } from "react-native";
+import { View, Text, TouchableHighlight, Alert } from "react-native";
 
 export function EventForm({ navigation }) {
   const handleAddPress = () => {
-    Alert.alert("you pressed add");
     navigation.navigate("EventList");
-
-    // this.navigation.navigate("EventList");
-
-    // ?   (navigation logic will go here)
   };
 
   return (
     <View>
-      <Button
-        title="Add this way"
-        onPress={() => navigation.navigate("EventList")}
-      ></Button>
-      <TouchableHighlight onPress={() => handleAddPress}>
+      <TouchableHighlight onPress={handleAddPress}>
         <Text>Add</Text>
       </TouchableHighlight>
     </View>
