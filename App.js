@@ -12,7 +12,7 @@ export default class MyStack extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="form">
+        <Stack.Navigator initialRouteName="list">
           <Stack.Screen
             name="list"
             component={EventList}
