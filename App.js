@@ -11,19 +11,17 @@ const Stack = createStackNavigator(); // returns an object containing 2 properti
 export default class MyStack extends React.Component {
   render() {
     return (
-      // verbage: "Each SCREEN in the NAVIGATOR can specify some options for the navigator, such as the title to render in the header."
-
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="EventForm">
+        <Stack.Navigator initialRouteName="form">
           <Stack.Screen
-            name="EventList"
+            name="list"
             component={EventList}
-            options={{ title: "this is the EventList" }}
+            options={{ title: "Your Events" }}
           />
           <Stack.Screen
-            name="EventForm"
+            name="form"
             component={EventForm}
-            options={{ title: "this is the EventForm" }}
+            options={{ title: "Add an event" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -31,14 +29,11 @@ export default class MyStack extends React.Component {
   }
 }
 
-// //The class below is all going to get deleted by Hendrik
+// // The class below got deleted when we put in navigation
 // export default class App extends React.Component {
 //   render() {
 //     return (
-//       // NavigationContainer is from RN docs, not Hendriks
-//       <NavigationContainer>
 //         <EventList />
-//       </NavigationContainer>
 //     );
 //   }
 // }

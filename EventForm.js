@@ -3,7 +3,7 @@ import { View, Text, TouchableHighlight } from "react-native";
 
 class EventForm extends Component {
   handleAddPress = () => {
-    this.props.navigation.navigate("EventList");
+    this.props.navigation.navigate("list");
     // ?
   };
 
@@ -20,6 +20,8 @@ class EventForm extends Component {
 
 export default EventForm;
 
+//
+//
 // USING FUNCTION COMPONENT [[ Don't forget to use Brackets in App.js
 // import statement: import { EventForm } from "./EventForm"; ]] :
 //
