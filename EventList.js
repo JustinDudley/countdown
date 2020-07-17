@@ -3,6 +3,7 @@ import { FlatList, Text, StyleSheet } from "react-native";
 import ActionButton from "react-native-action-button";
 
 import EventCard from "./EventCard";
+import { getEvents } from "./api";
 
 const styles = StyleSheet.create({
   list: {
@@ -30,11 +31,36 @@ class EventList extends Component {
       });
     }, 1000);
 
-    const events = require("./db.json").events.map((e) => ({
-      ...e,
-      date: new Date(e.date),
-    }));
-    this.setState({ events });
+    const fetchData = async () => {
+      fetch(
+        "https://rest32.bullhornstaffing.com/rest-services/234yo4/query/JobOrder?start=0&count=100&orderBy=type,-dateAdded&fields=id,dateAdded,title,publishedCategory,type,employmentType,address(city,state),publicDescription&where=isOpen=true+AND+isPublic=1&BhRestToken=8b48c314-71a5-4787-98fc-9f94d2b903ec"
+      )
+        // fetch("http://192.168.200.57:3000/events")
+        .then((response) => response.json())
+        .then((events) => console.log(events));
+      // .then((events) => events.map((e) => ({ ...e, date: new Date(e.date) })));
+    };
+
+    fetchData();
+
+    // this code is from Hendrik's repo. Result: a blank  screen, but at least it doesn't shut down the whole expo app
+    // this.props.navigation.addListener("didFocus", () => {
+    //   getEvents().then((events) => this.setState({ events }));
+    // });
+
+    // // "getEvents returns a promise, so we all a .then on there"
+    // //  THE FOLLOWING BLOCK OF CODE CAUSES THE EXPO APP ON MY PHONE TO STOP:
+    // getEvents().then((events) => this.setState({ events }));
+
+    //
+    //
+    // This is from before db.json was accessed via json-server. This pulls the data directly from the local file
+    // const events = require("./db.json").events.map((e) => ({
+    //   ...e,
+    //   date: new Date(e.date),
+    // }));
+    // this.setState({ events });
+    //
   }
 
   handleAddEvent = () => {
