@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
 });
 
 class EventList extends Component {
-  //default state for this component:
+  // default state for this component:
   state = {
     events: [],
   };
 
-  // to get the data that we want to bind to:
+  // to get the  data that we want to bind to:
   componentDidMount() {
     // updates every second
     setInterval(() => {

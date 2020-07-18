@@ -1,10 +1,10 @@
 import moment from "moment";
 
 // TO GENERATE NGROK, use 2 (TWO) terminals:
-// >countdown $ json-server --watch db.json
-// >countdown $ ngrok http 3000
+// >countdown $ json-server --watch db.json  // to specify port other than default 3000, $ json-server --watch -p 4007 db.json
+// >countdown $ ngrok http 3000   (doesn't have to be countdown)  to use other port? $ngrok http 4007
 
-const ngrokWithHttp = "http://f77fb5466f91.ngrok.io";
+const ngrokWithHttp = "http://d3d95a767425.ngrok.io";
 const url = `${ngrokWithHttp}/events`;
 
 export function getEvents() {
