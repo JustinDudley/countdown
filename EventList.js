@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FlatList, Text, StyleSheet } from "react-native";
 import ActionButton from "react-native-action-button";
+// import { NavigationEvents } from "react-navigation";
 
 import EventCard from "./EventCard";
 import { getEvents } from "./api";
@@ -31,7 +32,38 @@ class EventList extends Component {
       });
     }, 1000);
 
-    getEvents().then((events) => this.setState({ events }));
+    this._unsubscribe = this.props.navigation.addListener("focus", () => {
+      // console.log("didFocus DID fire"); // this DOES log, with 'didFocus' OR 'focus', but also with "didFcus"!!
+      getEvents().then((events) => this.setState({ events }));
+    });
+
+    //  description here, please.  'didFocus' ?  'focus' ? 'onDidFocus' ?
+    //
+    //  copied from Henrick github:
+    // this.props.navigation.addListener("didFocus", () => {
+    //   // console.log("didFocus DID fire"); // this DOES log, with 'didFocus' OR 'focus', but also with "didFcus"!!
+    //   getEvents().then((events) => this.setState({ events }));
+    // });
+    //
+    // coded by me from tutorial:
+    //  this.props.navigation.addListener("didFocus", () =>
+    //   getEvents().then((events) => this.setState({ events }))
+    // );
+
+    //
+    // former, works.  Before listener event introduced
+    // getEvents().then((events) => this.setState({ events }));
+    //
+  }
+
+  // componentDidMount() {
+  //   this._unsubscribe = navigation.addListener('focus', () => {
+  //     // do something
+  //   });
+  // }
+
+  componentWillUnmount() {
+    this._unsubscribe();
   }
 
   handleAddEvent = () => {
