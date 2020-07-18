@@ -31,6 +31,7 @@ class EventList extends Component {
       });
     }, 1000);
 
+    // getEvents works without this listener, but you it doesn't read the latest additions to db.json without a re-start
     this._unsubscribe = this.props.navigation.addListener("focus", () => {
       getEvents().then((events) => this.setState({ events }));
     });
