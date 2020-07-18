@@ -1,17 +1,50 @@
 import moment from "moment";
+import { v4 as uuidv4 } from "uuid";
 
 // TO GENERATE NGROK, use 2 (TWO) terminals:
 // >countdown $ json-server --watch db.json  // to specify port other than default 3000, $ json-server --watch -p 4007 db.json
 // >countdown $ ngrok http 3000   (doesn't have to be countdown)  to use other port? $ngrok http 4007
 
-const ngrokWithHttp = "http://d3d95a767425.ngrok.io";
+const ngrokWithHttp = "http://c62d5131b0fc.ngrok.io";
 const url = `${ngrokWithHttp}/events`;
 
-export function getEvents() {
+export const getEvents = () => {
   return fetch(url)
     .then((response) => response.json())
     .then((events) => events.map((e) => ({ ...e, date: new Date(e.date) })));
-}
+};
+
+// see below for former form of this function, before a quickfix automagically converted it to async function
+export const saveEvent = async ({ title, date }) => {
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        date,
+        uuidv4,
+      }),
+      headers: new Headers({ "Content-Type": "application/json" }),
+    });
+    return res.json;
+  } catch (err) {
+    return console.error(err);
+  }
+};
+
+// export const saveEvent = ({ title, date }) => {
+//   return fetch(url, {
+//     method: "POST",
+//     body: JSON.stringify({
+//       title,
+//       date,
+//       uuidv4,
+//     }),
+//     headers: new Headers({ "Content-Type": "application/json" }),
+//   })
+//     .then((res) => res.json)
+//     .catch((err) => console.error(err));
+// };
 
 export function formatDateTime(dateString) {
   const parsed = moment(new Date(dateString));
@@ -45,6 +78,7 @@ export function getCountdownParts(eventDate) {
   };
 }
 
+//
 //
 // const url = "http://localhost:3000/events";
 // this won't work because i'm using my phone, not my laptop,  so we do VOO-DOO:

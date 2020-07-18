@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { formatDateTime } from "./api";
+import { formatDateTime, saveEvent } from "./api";
 
 const styles = StyleSheet.create({
   fieldContainer: {
@@ -46,8 +46,8 @@ class EventForm extends Component {
   state = { title: null, date: "" };
 
   handleAddPress = () => {
-    console.log(this.state);
-    this.props.navigation.goBack();
+    saveEvent(this.state) // this.state is an object with title, date. Which is just what saveEvent needs
+      .then(() => this.props.navigation.goBack());
     // KEEP, also works: this.props.navigation.navigate("list");
   };
 
