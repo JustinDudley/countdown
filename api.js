@@ -1,6 +1,7 @@
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
+// I used ngrok, I think, because from my phone (using expo app) I couldn't access port:3000 on my laptop directly
 // TO GENERATE NGROK, use 2 (TWO) terminals:
 // >countdown $ json-server --watch db.json  // to specify port other than default 3000, $ json-server --watch -p 4007 db.json
 // >countdown $ ngrok http 3000   (doesn't have to be countdown)  to use other port? $ngrok http 4007
