@@ -2,11 +2,14 @@ import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
 // I used ngrok, I think, because from my phone (using expo app) I couldn't access port:3000 on my laptop directly
-// TO GENERATE NGROK, use 2 (TWO) terminals:
-// >countdown $ json-server --watch db.json  // to specify port other than default 3000, $ json-server --watch -p 4007 db.json
-// >countdown $ ngrok http 3000   (doesn't have to be countdown)  to use other port? $ngrok http 4007
+// TO GENERATE NGROK, use TWO terminals:
+// (1)   >countdown $ json-server --watch db.json   // default is port 3000. To specify another port: $ json-server --watch -p 4007 db.json
+// (2)   >countdown $ ngrok http 3000   (doesn't have to be countdown)  to use other port? $ngrok http 4007
+// (3)   Put the ngrok address into the code below (should be in a .env file, but...)
 
-const ngrokWithHttp = "http://c62d5131b0fc.ngrok.io";
+// WARNING: A common way for this program to break is this: If you hit submit before using the DatePicker, the json file will have an event with an invalid date, which will break the whole program next time it runs. So you need to go manually delete that event in the db.json file
+
+const ngrokWithHttp = "http://0bd011378b6a.ngrok.io"; // MUST CHANGE THIS EACH TIME.  (See above) (Must change it if you are running the program the next day. ngrok only lasts for a few hours)
 const url = `${ngrokWithHttp}/events`;
 
 export const getEvents = () => {
